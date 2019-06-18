@@ -27,7 +27,7 @@ public class SmsListener {
         System.out.println("手机号："+map.get("mobile"));
         System.out.println("验证码："+map.get("code"));
         try {
-            smsUtil.sendSms(map.get("mobile"),template_code,sign_name,"{\"number\":\""+ map.get("code") +"\"}");
+            smsUtil.sendSms(map.get("mobile"),template_code,sign_name,"{\"code\":"+ map.get("code") +"}");
             } catch (ClientException e) {
                 e.printStackTrace();
             }

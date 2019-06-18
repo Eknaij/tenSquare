@@ -7,7 +7,7 @@ spring:
     host: 192.168.192.130
 aliyun:
   sms:
-    accessKeyId: 替换成自己的
-    accessKeySecret: 替换成自己的
-    template_code: SMS_168306291
+    accessKeyId: LTAIRnRYq4jwUCxo
+    accessKeySecret: IUgFBjclOSQzWMfsFsCNLMmmN9UzRa
+    template_code: SMS_168310959
     sign_name: eknaij

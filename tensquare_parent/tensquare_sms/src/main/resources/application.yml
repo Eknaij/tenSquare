@@ -11,3 +11,9 @@ aliyun:
     accessKeySecret: 替换成自己的
     template_code: SMS_168306291
     sign_name: eknaij
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:6868/eureka
+  instance:
+    prefer-ip-address: true

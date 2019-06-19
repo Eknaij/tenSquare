@@ -81,7 +81,7 @@ public class GatheringController {
 	@RequestMapping(method=RequestMethod.POST)
 	public Result add(@RequestBody Gathering gathering  ){
 		gatheringService.add(gathering);
-		return new Result(true,StatusCode.OK,"增加成功");
+		return new Result(true,StatusCode.OK,"增加成功",null);
 	}
 	
 	/**
@@ -92,7 +92,7 @@ public class GatheringController {
 	public Result update(@RequestBody Gathering gathering, @PathVariable String id ){
 		gathering.setId(id);
 		gatheringService.update(gathering);
-		return new Result(true,StatusCode.OK,"修改成功");
+		return new Result(true,StatusCode.OK,"修改成功",null);
 	}
 	
 	/**
@@ -102,7 +102,7 @@ public class GatheringController {
 	@RequestMapping(value="/{id}",method= RequestMethod.DELETE)
 	public Result delete(@PathVariable String id){
 		gatheringService.deleteById(id);
-		return new Result(true,StatusCode.OK,"删除成功");
+		return new Result(true,StatusCode.OK,"删除成功",null);
 	}
 	
 }

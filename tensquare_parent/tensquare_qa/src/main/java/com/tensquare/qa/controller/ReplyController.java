@@ -2,6 +2,7 @@ package com.tensquare.qa.controller;
 import java.util.List;
 import java.util.Map;
 
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,6 +18,9 @@ import com.tensquare.qa.service.ReplyService;
 import entity.PageResult;
 import entity.Result;
 import entity.StatusCode;
+
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * reply控制器层
  * @author Administrator
@@ -29,8 +33,11 @@ public class ReplyController {
 
 	@Autowired
 	private ReplyService replyService;
-	
-	
+	@Autowired
+	private HttpServletRequest request;
+
+
+
 	/**
 	 * 查询全部数据
 	 * @return
@@ -80,6 +87,11 @@ public class ReplyController {
 	 */
 	@RequestMapping(method=RequestMethod.POST)
 	public Result add(@RequestBody Reply reply  ){
+		Claims claims=(Claims)request.getAttribute("user_claims");
+		if(claims==null){
+			return new Result(false,StatusCode.ACCESSERROR,"无权访问",null);
+		}
+		reply.setUserid(claims.getId());
 		replyService.add(reply);
 		return new Result(true,StatusCode.OK,"增加成功",null);
 	}

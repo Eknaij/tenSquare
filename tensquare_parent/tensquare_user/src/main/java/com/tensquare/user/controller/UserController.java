@@ -123,6 +123,22 @@ public class UserController {
 		userService.add(user,code);
 		return new Result(true,StatusCode.OK,"注册成功",null);
 	}
+	/**
+	 * 用户登陆
+	 * @param mobile
+	 * @param password
+	 * @return
+	 */
+	@RequestMapping(value="/login",method=RequestMethod.POST)
+	public Result login(String mobile,String password){
+		User user = userService.findByMobileAndPassword(mobile,password);
+		if(user!=null){
+			return new Result(true,StatusCode.OK,"登陆成功",null);
+		}else{
+			return new Result(false,StatusCode.LOGINERROE,"用户名或密码错误",null);
+		}
+	}
+
 
 
 }

@@ -5,10 +5,13 @@ import com.tensquare.spit.service.SpitService;
 import entity.PageResult;
 import entity.Result;
 import entity.StatusCode;
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @CrossOrigin //解决跨域问题
@@ -16,6 +19,9 @@ import org.springframework.web.bind.annotation.*;
 public class SpitController {
     @Autowired
     private SpitService spitService;
+    @Autowired
+    private HttpServletRequest request;
+
     /**
      * 查询全部数据
      * @return
@@ -39,6 +45,11 @@ public class SpitController {
      */
     @RequestMapping(method=RequestMethod.POST)
     public Result add(@RequestBody Spit spit ){
+        Claims claims=(Claims)request.getAttribute("user_claims");
+        if(claims==null){
+            return new Result(false,StatusCode.ACCESSERROR,"无权访问",null);
+        }
+        spit.setUserid(claims.getId());
         spitService.add(spit);
         return new Result(true,StatusCode.OK,"增加成功",null);
     }

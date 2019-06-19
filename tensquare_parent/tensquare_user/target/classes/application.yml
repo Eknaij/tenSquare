@@ -15,4 +15,8 @@ spring:
     host: 192.168.192.130
   rabbitmq:
     host: 192.168.192.130
+jwt:
+  config:
+    key: eknaij
+    ttl: 360000
 

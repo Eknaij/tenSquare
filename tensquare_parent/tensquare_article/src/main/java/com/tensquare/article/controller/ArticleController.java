@@ -2,6 +2,7 @@ package com.tensquare.article.controller;
 import java.util.List;
 import java.util.Map;
 
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,6 +18,9 @@ import com.tensquare.article.service.ArticleService;
 import entity.PageResult;
 import entity.Result;
 import entity.StatusCode;
+
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * article控制器层
  * @author Administrator
@@ -29,6 +33,8 @@ public class ArticleController {
 
 	@Autowired
 	private ArticleService articleService;
+	@Autowired
+	private HttpServletRequest request;
 	
 	
 	/**
@@ -80,6 +86,11 @@ public class ArticleController {
 	 */
 	@RequestMapping(method=RequestMethod.POST)
 	public Result add(@RequestBody Article article  ){
+		Claims claims=(Claims)request.getAttribute("user_claims");
+		if(claims==null){
+			return new Result(false,StatusCode.ACCESSERROR,"无权访问",null);
+		}
+		article.setUserid(claims.getId());
 		articleService.add(article);
 		return new Result(true,StatusCode.OK,"增加成功",null);
 	}

@@ -17,4 +17,7 @@ spring:
     mongodb:
       host: 192.168.192.130
       database: recruitdb
+jwt:
+  config:
+    key: eknaij
 

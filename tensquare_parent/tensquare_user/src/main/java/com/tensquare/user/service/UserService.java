@@ -9,6 +9,7 @@ import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Selection;
+import javax.transaction.Transactional;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -235,6 +236,23 @@ public class UserService {
 			return null;
 		}
 	}
+	/**
+	 * 更新粉丝数
+	 * @param x
+	 */
+	@Transactional
+	public void incFanscount(String userid,int x){
+		userDao.incFanscount(userid,x);
+	}
+	/**
+	 * 更新关注数
+	 * @param x
+	 */
+	@Transactional
+	public void incFollowcount(String userid,int x){
+		userDao.incFollowcount(userid,x);
+	}
+
 
 
 }

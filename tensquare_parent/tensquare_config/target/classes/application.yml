@@ -16,6 +16,6 @@ management: #暴露触发消息总线的地址
 eureka:
   client:
     service-url:
-      defaultZone: http://192.168.192.130:6868/eureka
+      defaultZone: http://192.168.192.130:9761/eureka
 server:
   port: 12000
